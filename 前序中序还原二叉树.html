@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var qian = ["a", "c", "f", "g", "b", "d", "e"];
+      var zhong = ["f", "c", "g", "a", "d", "b", "e"];
+
+      function Node(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+      }
+
+      // 前序中序还原二叉树
+      function huan(qian, zhong) {
+        if (
+          qian == null ||
+          zhong == null ||
+          qian.length == 0 ||
+          zhong.length == 0 ||
+          qian.length != zhong.length
+        ) {
+          return null;
+        }
+        var root = new Node(qian[0]);
+        var index = zhong.indexOf(root.value);
+        var leftQian = qian.slice(1, index + 1);
+        var leftZhong = zhong.slice(0, index);
+        root.left = huan(leftQian, leftZhong);
+        var rightQian = qian.slice(index + 1);
+        var rightZhong = zhong.slice(index + 1);
+        root.right = huan(rightQian, rightZhong);
+        return root;
+      }
+
+      var root = huan(qian, zhong);
+      console.log(root);
+    </script>
+  </body>
+</html>

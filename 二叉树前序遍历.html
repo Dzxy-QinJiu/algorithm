@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //         A
+      //    C         B
+      //  F   G     D   E
+      function Node(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+      }
+      var A = new Node("A");
+      var B = new Node("B");
+      var C = new Node("C");
+      var D = new Node("D");
+      var E = new Node("E");
+      var F = new Node("F");
+      var G = new Node("G");
+      A.left = C;
+      A.right = B;
+      C.left = F;
+      C.right = G;
+      B.left = D;
+      B.right = E;
+
+      // 前序遍历
+      function bian(root) {
+        if(root==null) return;
+        console.log(root.value);
+        bian(root.left);
+        bian(root.right);
+      }
+
+      bian(A);
+    </script>
+  </body>
+</html>

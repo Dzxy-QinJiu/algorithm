@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [8, 0, 2, 9, 6, 5, 7];
+
+        // 标准快速排序，  从小到大
+        // left右移，值>arr[0]时停住
+        // right左移，值<arr[0]时停住，值互换
+        // begin end 左闭右开
+        function swap(arr, a, b) {
+            var temp = arr[a];
+            arr[a] = arr[b];
+            arr[b] = temp;
+        }
+
+        function subQuickSort(arr, begin, end) {
+            if (begin >= end - 1) {
+                return;
+            }
+            var left = begin;
+            var right = end;
+            do {
+                do {
+                    left++;
+                } while (left < right && arr[left] < arr[begin]);
+                do {
+                    right--;
+                } while (left < right && arr[right] > arr[begin]);
+                if (left < right) {
+                    swap(arr, left, right);
+                }
+            } while (left < right);
+            var swapIndex = left == right ? right - 1 : right;
+            swap(arr, begin, swapIndex);
+            subQuickSort(arr, begin, swapIndex);
+            subQuickSort(arr, swapIndex + 1, end);
+            return arr;
+        }
+
+        function quickSort(arr) {
+            return subQuickSort(arr, 0, arr.length)
+        }
+
+        console.log(quickSort(arr))
+    </script>
+</body>
+
+</html>

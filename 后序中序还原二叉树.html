@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      var hou = ["f", "g", "c", "d", "e", "b", "a"];
+      var zhong = ["f", "c", "g", "a", "d", "b", "e"];
+
+      function Node(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+      }
+
+      function huan(hou, zhong) {
+        if (
+          hou == null ||
+          zhong == null ||
+          hou.length != zhong.length ||
+          hou.length == 0 ||
+          zhong.length == 0
+        ) {
+          return null;
+        }
+        var root = new Node(hou[hou.length - 1]);
+        var index = zhong.indexOf(root.value);
+        var leftHou = hou.slice(0, index);
+        var leftZhong = zhong.slice(0, index);
+        root.left = huan(leftHou, leftZhong);
+        var rightHou = hou.slice(index, hou.length - 1);
+        var rightZhong = zhong.slice(index + 1);
+        root.right = huan(rightHou, rightZhong);
+        return root;
+      }
+
+      console.log(huan(hou,zhong))
+    </script>
+  </body>
+</html>
